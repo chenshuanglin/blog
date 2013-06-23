@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-5-18 21:27:29 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="bean.Blogclassify" table="blogclassify" catalog="myblog">
+        <id name="classifyId" type="java.lang.Integer">
+            <column name="classifyId" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="users" class="bean.Users" fetch="select">
+            <column name="userId" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="45" not-null="true" />
+        </property>
+        <set name="blogcontents" table="blogcontent" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="classifyId" not-null="true" />
+            </key>
+            <one-to-many class="bean.Blogcontent" />
+        </set>
+    </class>
+</hibernate-mapping>

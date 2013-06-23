@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-5-18 21:27:29 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="bean.Blogcontent" table="blogcontent" catalog="myblog">
+        <id name="blogContentId" type="java.lang.Integer">
+            <column name="blogContentId" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="blogclassify" class="bean.Blogclassify" fetch="select">
+            <column name="classifyId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="users" class="bean.Users" fetch="select">
+            <column name="usid" not-null="true" />
+        </many-to-one>
+        <property name="topic" type="string">
+            <column name="topic" length="100" not-null="true" />
+        </property>
+        <property name="matter" type="string">
+            <column name="matter" length="5000" not-null="true" />
+        </property>
+        <property name="postTime" type="timestamp">
+            <column name="postTime" length="19" not-null="true" />
+        </property>
+        <set name="commentses" table="comments" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="blogid" not-null="true" />
+            </key>
+            <one-to-many class="bean.Comments" />
+        </set>
+    </class>
+</hibernate-mapping>

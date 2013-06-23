@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-5-18 21:27:29 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="bean.Users" table="users" catalog="myblog">
+        <id name="userId" type="java.lang.Integer">
+            <column name="userId" />
+            <generator class="identity" />
+        </id>
+        <property name="username" type="string">
+            <column name="username" length="20" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="20" not-null="true" />
+        </property>
+        <property name="nic" type="string">
+            <column name="nic" length="20" not-null="true" />
+        </property>
+        <property name="sex" type="string">
+            <column name="sex" length="2" not-null="true" />
+        </property>
+        <property name="age" type="java.lang.Integer">
+            <column name="age" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="20" />
+        </property>
+        <property name="selfshow" type="string">
+            <column name="selfshow" length="300" />
+        </property>
+        <property name="photo" type="string">
+            <column name="photo" length="45" />
+        </property>
+        <set name="commentses" table="comments" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="useId" not-null="true" />
+            </key>
+            <one-to-many class="bean.Comments" />
+        </set>
+        <set name="blogclassifies" table="blogclassify" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="userId" not-null="true" />
+            </key>
+            <one-to-many class="bean.Blogclassify" />
+        </set>
+        <set name="blogcontents" table="blogcontent" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usid" not-null="true" />
+            </key>
+            <one-to-many class="bean.Blogcontent" />
+        </set>
+    </class>
+</hibernate-mapping>
